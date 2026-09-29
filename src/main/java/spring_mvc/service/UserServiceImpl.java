@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<User> findAll() {
-        return List.of();
+        return userDao.findAll();
     }
 
     @Override
@@ -37,5 +37,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(User user) {
         userDao.deleteUser(user);
+    }
+
+    @Override
+    public boolean existsByEmail(String email, Long excludeId) {
+        return userDao.existsByEmail(email, excludeId);
     }
 }

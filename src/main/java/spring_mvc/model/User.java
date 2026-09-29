@@ -9,8 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import spring_mvc.enums.EmploymentType;
@@ -33,11 +34,11 @@ public class User {
     private String surname;
 
     @Column
-    @NotNull
+    @Min(value = 18, message = "Age must be at least 18")
     private int age;
 
-    @Column
-    @Email
+    @Column(unique = true)
+    @Email(message = "Enter a valid email")
     private String email;
 
     @Column

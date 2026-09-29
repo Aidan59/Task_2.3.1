@@ -50,7 +50,21 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void deleteUser(User user) {
-        entityManager.remove(user);
+        entityManager.createQuery("delete User u where u.id = :id")
+                .setParameter("id", user.getId())
+                .executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public boolean existsByEmail(String email, Long excludeId) {
+        Long count = entityManager.createQuery(
+                        "select count(u) from User u where u.email = :email and u.id <> :id",
+                        Long.class)
+                .setParameter("email", email)
+                .setParameter("id", excludeId)
+                .getSingleResult();
+        return count > 0;
     }
 
 }

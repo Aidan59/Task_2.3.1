@@ -10,4 +10,5 @@ public interface UserDao {
     User getUser(User user);
     void updateUser(User user);
     void deleteUser(User user);
+    boolean existsByEmail(String email, Long excludeId);
 }
